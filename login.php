@@ -1,4 +1,4 @@
-<?php 
+<?php
 // Recebe os dados do formulário
 $nome = $_POST["nome"];
 $senha = $_POST["senha"];
@@ -27,6 +27,23 @@ if ($acao == "cadastro") {
         $resposta[] = array("resultado" => "inserido");
     } else {
         $resposta[] = array("resultado" => "erro de inserção");
+    }
+
+    $stmt->close();
+} elseif ($acao == "login") {
+    // Prepara a SQL para verificar as credenciais
+    $sql = "SELECT * FROM clientes WHERE nome = ? AND senha = ?";
+    $stmt = $con->prepare($sql);
+    $stmt->bind_param("ss", $nome, $senha);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    // Verifica se as credenciais são válidas
+    if ($result->num_rows > 0) {
+        $_SESSION["nome"] = $nome;
+        $resposta[] = array("resultado" => "login bem-sucedido");
+    } else {
+        $resposta[] = array("resultado" => "nome ou senha incorretos");
     }
 
     $stmt->close();
