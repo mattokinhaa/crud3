@@ -21,7 +21,8 @@ if ($acao == "cadastro") {
     // Executa a SQL
     if ($stmt->execute()) {
         $resposta[] = array("resultado" => "inserido");
-        header('Location: pagina1.html')
+        $stmt->close();
+        header('Location: pagina1.html');
     } else {
         $resposta[] = array("resultado" => "erro de inserção");
         echo json_encode($resposta);
@@ -39,7 +40,7 @@ if ($acao == "cadastro") {
     if ($result->num_rows > 0) {
         $_SESSION["nome"] = $nome;
         $resposta[] = array("resultado" => "login bem-sucedido");
-        header('Location: pagina1.html')
+        header('Location: pagina1.html');
     } else {
         $resposta[] = array("resultado" => "nome ou senha incorretos");
         echo json_encode($resposta);
