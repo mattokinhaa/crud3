@@ -21,13 +21,13 @@ if ($acao == "cadastro") {
     // Executa a SQL
     if ($stmt->execute()) {
         $resposta[] = array("resultado" => "inserido");
-        $stmt->close();
         header('Location: pagina1.html');
     } else {
         $resposta[] = array("resultado" => "erro de inserção");
         echo json_encode($resposta);
-        $stmt->close();
     }
+    
+    $stmt->close();
 } elseif ($acao == "login") {
     // Prepara a SQL para verificar as credenciais
     $sql = "SELECT * FROM clientes WHERE nome = ? AND senha = ?";
