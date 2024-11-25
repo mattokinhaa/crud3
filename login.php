@@ -1,7 +1,8 @@
 <?php
 
-//iinclui configuracao da database
+//inclui configuracao da database
 include('config.php')
+
 // Recebe os dados do formulário
 $nome = $_POST["nome"];
 $senha = $_POST["senha"];
