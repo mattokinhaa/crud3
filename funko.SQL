@@ -1,4 +1,3 @@
-drop database Funko;
 create database Funko;
 USE Funko;
 
