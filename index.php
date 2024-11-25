@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>crud3</title>
+    <title>Login</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -11,7 +11,13 @@
         <div class="login">
             <div class="input__container">
                 <div class="shadow__input"></div>
-                <form id="form" action="login.php" method="post">
+                <?php if (isset($_GET['erro']) && $_GET['erro'] == 'login'): ?>
+                    <p style="color: red;">Usuário ou senha incorretos</p>
+                <?php endif; ?>
+                <?php if (isset($_GET['sucesso']) && $_GET['sucesso'] == 'cadastro'): ?>
+                    <p style="color: green;">Seu cadastro foi concluído com sucesso, faça o login em nossa plataforma abaixo</p>
+                <?php endif; ?>
+                <form action="login.php" method="post">
                     <div class="username">
                         <button class="input__button__shadow">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#000000" width="20px" height="20px">
@@ -29,21 +35,13 @@
                         </button>
                         <input type="password" name="senha" class="input__search" placeholder="Insira sua senha" required />
                     </div>
-                    <input type="hidden" id="acao" name="acao" value="login">
                     <div class="user-btn">
-                        <button type="button" onclick="submitForm('cadastro')">Cadastrar</button>
-                        <button type="button" onclick="submitForm('login')">Login</button>
+                        <button type="submit" name="acao" value="login">Login</button>
                     </div>
                 </form>
+                <p>Não tem uma conta? <a href="registro.php">Cadastre-se aqui!</a></p>
             </div>
         </div>
     </section>
-
-    <script>
-        function submitForm(acao) {
-            document.getElementById('acao').value = acao;
-            document.getElementById('form').submit();
-        }
-    </script>
 </body>
 </html>
