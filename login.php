@@ -12,23 +12,7 @@ $acao = $_POST["acao"];
 session_start();
 $resposta = array();
 
-if ($acao == "cadastro") {
-    // Prepara a SQL para inserção
-    $sql = "INSERT INTO clientes (nome, senha) VALUES (?, ?)";
-    $stmt = $con->prepare($sql);
-    $stmt->bind_param("ss", $nome, $senha);
-
-    // Executa a SQL
-    if ($stmt->execute()) {
-        $resposta[] = array("resultado" => "inserido");
-        header('Location: pagina1.html');
-    } else {
-        $resposta[] = array("resultado" => "erro de inserção");
-        echo json_encode($resposta);
-    }
-    
-    $stmt->close();
-} elseif ($acao == "login") {
+if ($acao == "login") {
     // Prepara a SQL para verificar as credenciais
     $sql = "SELECT * FROM clientes WHERE nome = ? AND senha = ?";
     $stmt = $con->prepare($sql);
